@@ -20,6 +20,9 @@ jobs:
         with:
           terraform_version: 1.6.0
 
+      - name: Set Terraform Workspace Name
+        run: echo "TF_WORKSPACE=wiz-default" >> $GITHUB_ENV
+
       - name: Configure Terraform CLI Auth for JFrog Remote Backend
         run: |
           mkdir -p ~/.terraform.d
