@@ -8,7 +8,6 @@ on:
 
 jobs:
   terraform:
-    name: Deploy Terraform Infra
     runs-on: ubuntu-latest
 
     steps:
@@ -20,23 +19,11 @@ jobs:
         with:
           terraform_version: 1.6.0
 
-      - name: Authenticate to GCP
-        run: |
-          echo "${{ secrets.GOOGLE_CREDENTIALS }}" > "${HOME}/gcloud.json"
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: "${HOME}/gcloud.json"
-
       - name: Terraform Init
         run: terraform -chdir=infra init
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: "${HOME}/gcloud.json"
 
       - name: Terraform Plan
         run: terraform -chdir=infra plan
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: "${HOME}/gcloud.json"
 
       - name: Terraform Apply
         run: terraform -chdir=infra apply -auto-approve
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: "${HOME}/gcloud.json"
