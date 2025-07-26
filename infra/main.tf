@@ -7,3 +7,9 @@ terraform {
     }
   }
 }
+
+resource "null_resource" "demo" {
+  provisioner "local-exec" {
+    command = "echo 'This is just a test run.'"
+  }
+}
